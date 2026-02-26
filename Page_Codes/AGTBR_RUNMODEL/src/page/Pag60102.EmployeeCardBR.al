@@ -36,11 +36,33 @@ page 60102 "Employee Card BR"
                     var
                         Lookup: Record "Project";
                     begin
+                        // if Page.RunModal(Page::"Project List BR", Lookup) = Action::Cancel then begin
+                        //     Rec."Project No." := Lookup."Project No.";
+                        //     Rec."Project Name" := Lookup."Project Name";
+
+                        // end;
+
+
+                        // if Page.RunModal(Page::"Project List BR", Lookup) = Action::OK then begin
+                        //     Rec."Project No." := Lookup."Project No.";
+                        //     Rec."Project Name" := Lookup."Project Name";
+
+                        // end;
+
+                        // if Page.RunModal(Page::"Project List BR", Lookup) = Action::None then begin
+                        //     Rec."Project No." := Lookup."Project No.";
+                        //     Rec."Project Name" := Lookup."Project Name";
+
+                        // end;
+
                         if Page.RunModal(Page::"Project List BR", Lookup) = Action::LookupOK then begin
                             Rec."Project No." := Lookup."Project No.";
                             Rec."Project Name" := Lookup."Project Name";
 
                         end;
+
+
+
                     end;
                 }
             }
@@ -64,13 +86,13 @@ page 60102 "Employee Card BR"
         }
     }
 
-    trigger OnOpenPage()
+    // trigger OnOpenPage()
 
-    begin
-        CurrPage.Update();
-        Message('This is Coming from OnOpenPage trigger');
+    // begin
+    //     CurrPage.Update();
+    //     Message('This is Coming from OnOpenPage trigger');
 
-    end;
+    // end;
 
     var
         myInt: Integer;

@@ -13,11 +13,19 @@ page 60153 "Project List BR"
             {
                 field("Project No."; Rec."Project No.")
                 {
+                    ApplicationArea = All;
+                    Caption = 'Project No.';
 
                 }
                 field("Project Name"; Rec."Project Name")
                 {
 
+                    trigger OnValidate()
+
+                    begin
+                        CurrPage.Update();
+                        Message('This is Coming from OnValidate trigger of Project Name field');
+                    end;
                 }
             }
         }

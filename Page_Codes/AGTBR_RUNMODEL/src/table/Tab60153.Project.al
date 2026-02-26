@@ -8,6 +8,7 @@ table 60153 "Project"
         {
             DataClassification = ToBeClassified;
             AutoIncrement = true;
+            Editable = false;
 
         }
         field(2; "Project Name"; Text[50])
