@@ -4,9 +4,10 @@ table 60147 "BR_STUDENT"
 
     fields
     {
-        field(1; "No."; Code[20])       // Primary key field
+        field(1; "No."; Integer)       // Primary key field
         {
             DataClassification = ToBeClassified;
+            AutoIncrement = true;
 
 
         }
@@ -62,6 +63,19 @@ table 60147 "BR_STUDENT"
         field(6; "Grade"; Text[10])     //System calculated
         {
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                if Rec."Total Marks" >= 85 then
+                    Rec.Grade := 'A'
+                else if Rec."Total Marks" >= 70 then
+                    Rec.Grade := 'B'
+                else if Rec."Total Marks" >= 40 then
+                    Rec.Grade := 'C'
+                else
+                    Rec.Grade := 'F';
+                Rec."Block Reason" := 'You Did Not Pass';
+            end;
+
 
 
         }
@@ -76,11 +90,14 @@ table 60147 "BR_STUDENT"
                     // Basic email validation check
                     if (StrPos(Rec.Email, '@') = 0) then begin
                         Rec."Attempt Count" := Rec."Attempt Count" + 1;
+                        Rec.Modify(True); // Update Attempt Count before error
 
                         // Auto block after 3 invalid attempts
                         if Rec."Attempt Count" >= 3 then begin
                             Rec.Status := Rec.Status::Blocked;
                             Rec."Block Reason" := 'Invalid email attempts exceeded';
+                            Rec.Modify(True); // Update status and block reason
+                            Message('Student %1 has been blocked due to multiple invalid email attempts.', Rec."No.");
                         end;
 
                         Error('Invalid email for Active student.');
@@ -107,14 +124,10 @@ table 60147 "BR_STUDENT"
         {
             DataClassification = ToBeClassified;
             Editable = false;
-            trigger OnValidate()
-            begin
-                if (Rec."Attempt Count" = 3) then
-                    Rec.Status := Rec.Status::Blocked;
-            end;
         }
 
     }
+
 
     keys
     {
