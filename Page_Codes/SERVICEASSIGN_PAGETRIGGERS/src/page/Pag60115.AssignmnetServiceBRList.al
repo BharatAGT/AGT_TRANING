@@ -1,4 +1,4 @@
-page 60115 "Assignmnet Service BR List"
+page 60121 "Assignmnet Service BR List"
 {
     PageType = List;
     ApplicationArea = All;

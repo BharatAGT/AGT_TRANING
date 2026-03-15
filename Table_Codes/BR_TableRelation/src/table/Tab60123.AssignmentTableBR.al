@@ -6,13 +6,12 @@ table 60185 "Assignment Table BR"
     {
         field(1; "Assignment No."; Code[20])
         {
-            DataClassification = ToBeClassified;
-
         }
-        field(2; "Item No."; Integer)
+
+        field(2; "Item No."; Code[20])
         {
-            DataClassification = ToBeClassified;
-            TableRelation = "Master Table BR"."Item No." where("Item Type" = const(service));
+            TableRelation = "Master Table BR"."Item No."
+                            WHERE("Item Type" = CONST(Service));
 
             trigger OnValidate()
             var
@@ -24,23 +23,22 @@ table 60185 "Assignment Table BR"
                 end;
             end;
         }
+
         field(3; "Item Name"; Text[100])
         {
-            DataClassification = ToBeClassified;
-        }
-        field(4; "Service Cost"; Decimal)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(5; "Technician Name"; text[50])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(6; "Assignment Date"; Date)
-        {
-            DataClassification = ToBeClassified;
         }
 
+        field(4; "Service Cost"; Decimal)
+        {
+        }
+
+        field(5; "Technician Name"; Text[100])
+        {
+        }
+
+        field(6; "Assignment Date"; Date)
+        {
+        }
     }
 
     keys
@@ -50,33 +48,4 @@ table 60185 "Assignment Table BR"
             Clustered = true;
         }
     }
-
-    fieldgroups
-    {
-        // Add changes to field groups here
-    }
-
-    var
-        myInt: Integer;
-
-    trigger OnInsert()
-    begin
-
-    end;
-
-    trigger OnModify()
-    begin
-
-    end;
-
-    trigger OnDelete()
-    begin
-
-    end;
-
-    trigger OnRename()
-    begin
-
-    end;
-
 }

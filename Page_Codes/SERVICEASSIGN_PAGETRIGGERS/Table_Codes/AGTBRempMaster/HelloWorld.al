@@ -6,10 +6,10 @@ namespace DefaultPublisher.AGTBRempMaster;
 
 using Microsoft.Sales.Customer;
 
-pageextension 60106 CustomerListExt extends "Customer List"
-{
-    trigger OnOpenPage();
-    begin
-        //Message('App published: Hello world');
-    end;
-}
+// pageextension 60106 CustomerListExt extends "Customer List"
+// {
+//     trigger OnOpenPage();
+//     begin
+//         //Message('App published: Hello world');
+//     end;
+// }

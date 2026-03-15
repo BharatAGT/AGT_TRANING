@@ -1,0 +1,129 @@
+1. Create an action on Customer Card.
+Filter Sales Header where
+"Sell-to Customer No." = current customer
+"Document Type" = Invoice
+Filter Posting Date = Current Month using SetFilter.
+Use FindSet() and loop through invoices.
+Calculate:
+Total invoices count
+Total amount
+Average invoice amount (use operators)
+Use Round() on the average value.
+Use a procedure to calculate the totals.
+Show message:Customer Invoice Summary
+             Customer No : ___
+             Total Invoices : ___
+             Total Amount : ___
+             Average Invoice Amount : ___
+
+
+
+2. Create an action on Customer List.
+Create a temporary table variable of Customer.
+Filter customers where:Balance > 50
+Loop through customers using FindSet().
+Insert those customers into temporary table.
+Count total records in the temporary table.
+Use FindLast() on the temporary table.
+Show message:High Value Customers : ___
+             Last Customer in Temp Table : ___
+             Customer Name : ___
+
+
+
+
+
+
+3. Create an action on Item List.
+Filter items where:Blocked = FALSE
+Loop using FindSet().
+For each item:Check inventory using CalcFields(Inventory).
+Identify:
+Item with highest inventory
+Item with lowest inventory
+Use conditional statements.
+Show message:
+Highest Inventory Item : ___
+Inventory : ___
+Lowest Inventory Item : ___
+Inventory : ___
+
+4.Create an action on Sales Order List.
+Filter:Document Type = Order
+Loop using FindSet().
+Compare:
+Posting Date
+and
+WorkDate()
+Identify orders where:Posting Date > WorkDate()
+Count such records.
+Show: 
+Orders with Future Posting Date : ___
+Last Order No : ___
+Use:
+FindLast() to show last order.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pageextension 60103 "CustExtTempBR" extends "Customer List"
+{
+    actions
+    {
+        addlast(Processing)
+        {
+            action("High Value Customers")
+            {
+                ApplicationArea = All;
+                Caption = 'High Value Customer <BR>';
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    Cust: Record Customer;
+                    TempCust: Record Customer temporary;
+                    CountCust: Integer;
+                begin
+                    Cust.SetFilter(Balance, '>50');
+
+                    if Cust.FindSet() then
+                        repeat
+                            TempCust.Init();
+                            TempCust := Cust;
+                            TempCust.Insert();
+                        until Cust.Next() = 0;
+
+
+                    CountCust := TempCust.Count;
+
+
+                    if TempCust.FindLast() then
+                        Message(
+                        'High Value Customers : %1 \ Last Customer in Temp Table : %2 \ Customer Name : %3',
+                        CountCust,
+                        TempCust."No.",
+                        TempCust.Name);
+                end;
+            }
+        }
+    }
+}

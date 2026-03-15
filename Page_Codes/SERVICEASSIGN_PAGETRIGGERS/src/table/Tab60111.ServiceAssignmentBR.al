@@ -1,4 +1,4 @@
-table 60111 "Service Assignment BR"
+table 60120 "Service Assignment BR"
 {
     DataClassification = ToBeClassified;
 

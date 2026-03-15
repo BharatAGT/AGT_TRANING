@@ -24,6 +24,7 @@ page 60153 "Project List BR"
 
                     begin
                         CurrPage.Update();
+                        
                         Message('This is Coming from OnValidate trigger of Project Name field');
                     end;
                 }

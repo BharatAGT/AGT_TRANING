@@ -1,4 +1,4 @@
-page 60116 "Assignmnet Service  CARD BR"
+page 60122 "Assignmnet Service  CARD BR"
 {
     PageType = Card;
     ApplicationArea = All;

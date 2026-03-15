@@ -1,13 +1,8 @@
 {
-<<<<<<< HEAD
+
   "id": "2547c8fb-7321-4494-ad82-a776276c4502",
   "name": "SERVICEASSIGN_PAGETRIGGERS",
   "publisher": "AGT BR",
-=======
-  "id": "a88f79d3-d09d-4ee5-b47e-4e4ff6d038d5",
-  "name": "ServiceAssignmentBR",
-  "publisher": "Bharat Ranjan",
->>>>>>> 6d2527292d939c2452dfe7c81013642406a702fd
   "version": "1.0.0.0",
   "brief": "",
   "description": "",

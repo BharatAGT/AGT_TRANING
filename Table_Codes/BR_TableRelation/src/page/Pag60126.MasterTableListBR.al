@@ -2,8 +2,8 @@ page 60181 "Master Table List BR"
 {
     PageType = List;
     ApplicationArea = All;
-    UsageCategory = Administration;
     SourceTable = "Master Table BR";
+    UsageCategory = Administration;
     CardPageId = "Master Table Card BR";
 
     layout
@@ -12,45 +12,12 @@ page 60181 "Master Table List BR"
         {
             repeater(GroupName)
             {
-                field("Item No."; Rec."Item No.")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Item No.';
-                }
-                field("Item Name"; Rec."Item Name")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Item Name';
-                }
-                field("Item Type"; Rec."Item Type")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Item Type ';
-                }
-                field("Service Cost"; Rec."Service Cost")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Service Cost';
-                }
+                field("Item No."; Rec."Item No.") { ApplicationArea = All; }
+                field("Item Name"; Rec."Item Name") { ApplicationArea = All; }
+                field("Item Type"; Rec."Item Type") { ApplicationArea = All; }
+                field("Service Cost"; Rec."Service Cost") { ApplicationArea = All; }
+                field("Total Assignments"; Rec."Total Assignments") { ApplicationArea = All; }
             }
         }
     }
-
-    actions
-    {
-        area(Processing)
-        {
-            action(ActionName)
-            {
-
-                trigger OnAction()
-                begin
-
-                end;
-            }
-        }
-    }
-
-    var
-        myInt: Integer;
 }

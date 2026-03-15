@@ -2,9 +2,9 @@ page 60183 "Assignment Table List BR"
 {
     PageType = List;
     ApplicationArea = All;
-    UsageCategory = Administration;
     SourceTable = "Assignment Table BR";
     CardPageId = "Assignment Table Card BR";
+    UsageCategory = Administration;
 
     layout
     {
@@ -12,31 +12,11 @@ page 60183 "Assignment Table List BR"
         {
             repeater(GroupName)
             {
-                field("Assignment No."; Rec."Assignment No.")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Assignment No.';
-                }
-                field("Item No."; Rec."Item No.")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Item No.';
-                }
-                field("Item Name"; Rec."Item Name")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Item Name';
-                }
-                field("Technician Name"; Rec."Technician Name")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Technician Name';
-                }
-                field("Assignment Date"; Rec."Assignment Date")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Assignment Date';
-                }
+                field("Assignment No."; Rec."Assignment No.") { ApplicationArea = All; }
+                field("Item No."; Rec."Item No.") { ApplicationArea = All; }
+                field("Item Name"; Rec."Item Name") { ApplicationArea = All; }
+                field("Technician Name"; Rec."Technician Name") { ApplicationArea = All; }
+                field("Assignment Date"; Rec."Assignment Date") { ApplicationArea = All; }
             }
         }
     }
@@ -45,17 +25,17 @@ page 60183 "Assignment Table List BR"
     {
         area(Processing)
         {
-            action(ActionName)
+            action("View Items")
             {
+                ApplicationArea = All;
 
                 trigger OnAction()
+                var
+                    ItemRec: Record "Master Table BR";
                 begin
-
+                    Page.Run(Page::"Master Table List BR", ItemRec);
                 end;
             }
         }
     }
-
-    var
-        myInt: Integer;
 }
