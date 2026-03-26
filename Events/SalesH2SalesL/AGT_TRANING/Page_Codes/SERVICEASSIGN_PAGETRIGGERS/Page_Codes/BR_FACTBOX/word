@@ -1,0 +1,55 @@
+Common Table Structure (TStudent ) 
+
+No. (Code[20]) – Primary Key 
+
+Name (Text[100]) – Student Name 
+
+Status (Draft, Active, Blocked) – Lifecycle state 
+
+Is Active (Boolean) – Indicates active state 
+
+Total Marks (Decimal) – Range 0–100 
+
+Grade (Code[10]) – System calculated 
+
+Email (Text[100]) – Contact email 
+
+Phone (Text[20]) – Contact number 
+
+Block Reason (Text[150]) – Required when blocked 
+
+Attempt Count (Integer) – Validation failure counter 
+
+Created By (Code[50]) – Auto-filled 
+
+Created On (Date) – Auto-filled 
+
+Last Modified By (Code[50]) – Auto-filled 
+
+Last Modified On (Date) – Auto-filled 
+
+*********************************************************
+
+Focus: OnDeleteRecord() and Field OnValidate() 
+
+Deletion allowed only if Status = Draft AND Total Marks = 0. 
+
+Prevent delete if Status = Active OR Marks > 0. 
+
+If Attempt Count ≥ 5 → Require confirmation before delete. 
+
+Total Marks validation: 0–100 range. 
+
+Invalid marks → increment Attempt Count. 
+
+Marks < 40 → Auto block student. 
+
+Marks ≥ 85 & Active → Show academic award message. 
+
+Active status requires valid email. 
+
+Invalid email increments Attempt Count. 
+
+3 invalid emails → Auto block student.  
+
+Show Factbox 

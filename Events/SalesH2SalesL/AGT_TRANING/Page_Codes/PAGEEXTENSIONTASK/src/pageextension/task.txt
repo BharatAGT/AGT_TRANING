@@ -1,0 +1,27 @@
+Bharat:
+1.Create an action on Item List.
+Filter Items where: Inventory > 3 using SetFilter.
+Count those items.
+Show message:Total Items with Inventory > 3 : ___
+
+2.Create an action on Customer Card.
+Filter Sales Header using SetRange
+"Sell-to Customer No." = current customer
+"Document Type" = Invoice
+Use FindLast
+Show: Last Invoice No
+      Posting Date
+      Amount:- use Round() on the amount.
+
+3. Create an action on Customer List.
+Filter customers created today
+Use FindLast
+Show:Latest Customer Created Today
+     Customer No
+     Name
+
+4.Create an action on Customer Card.
+ Filter Customer Ledger Entry:
+ Customer No = current customer and Document Type = Invoice
+ Use CalcSums("Sales")
+ Show message: Total Sales Amount = ___

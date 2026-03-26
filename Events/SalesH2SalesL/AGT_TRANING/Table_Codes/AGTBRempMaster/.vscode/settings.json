@@ -1,0 +1,6 @@
+{
+    "gitlens.gitCommands.avatars": false,
+    "gitlens.gitCommands.closeOnFocusOut": false,
+    "gitlens.gitkraken.mcp.autoEnabled": false,
+    "gitlens.terminal.overrideGitEditor": false
+}
