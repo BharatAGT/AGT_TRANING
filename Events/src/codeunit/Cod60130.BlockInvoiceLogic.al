@@ -1,3 +1,11 @@
+/-- 1. Block invoice  only if:
+The overdue amount exceeds  (₹10,000).
+OR the number of overdue invoices is more than a limit (3 overdue invoices).
+Also:
+If a invoice is blocked, show a confirmation dialog.
+Only users with a  SUPER user should be allowed to override and continue posting. --/
+
+
 codeunit 60131 "Block Invoice"
 {
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnBeforePostSalesDoc', '', false, false)]
