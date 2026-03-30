@@ -1,5 +1,5 @@
 
-codeunit 60111 "Blocked Item"
+codeunit 60112 "Blocked Item"
 {
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", OnBeforePostSalesDoc, '', false, false)]
     local procedure PreventForbiddenItemPost(var SalesHeader: Record "Sales Header")
