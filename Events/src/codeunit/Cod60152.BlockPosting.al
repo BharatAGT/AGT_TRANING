@@ -1,3 +1,6 @@
+ Stop posting and releasing the sales Order if no 
+attachment is attached.
+
 // codeunit 60152 "Block Posting"
 // {
 //     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnBeforePostSalesDoc', '', false, false)]
