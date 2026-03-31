@@ -1,3 +1,8 @@
+when a user adds an item to a 
+Sales Order, check if quantity is insufficient at the
+ selected location.  create and post an Item Journal entry to
+ increase inventory.
+
 codeunit 60171 "Auto Inventory Fix"
 {
     // Subscribe to the OnAfterValidate event on the Sales Line table.
