@@ -1,3 +1,6 @@
+ Stop posting and releasing the sales Order if no 
+attachment is attached.
+
 // codeunit 60151 "Block Release"
 // {
 //     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Release Sales Document", 'OnBeforeReleaseSalesDoc', '', false, false)]
