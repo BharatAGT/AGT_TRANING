@@ -1,12 +1,11 @@
-// pageextension 60104 SalesLineExtPage extends "Sales Order Subform"
+// pageextension 60224 "Pur.line Ext" extends "Purchase Order Subform"
 // {
 //     layout
 //     {
 //         addafter(Description)
 //         {
-//             field("Delivery BR"; Rec."Delivery")
+//             field("Bharat"; Rec."Bharat")
 //             {
-//                 Caption = 'Delivery BR';
 //                 ApplicationArea = All;
 //             }
 //         }
