@@ -51,6 +51,7 @@
 //         ItemJnlLine."Journal Batch Name" := 'DEFAULT';
 
 //         // Find the next available Line No. in this batch
+//         ItemJnlLine.Reset();
 //         ItemJnlLine.SetRange("Journal Template Name", 'ITEM');
 //         ItemJnlLine.SetRange("Journal Batch Name", 'DEFAULT');
 //         if ItemJnlLine.FindLast() then
@@ -68,11 +69,7 @@
 
 //         // Save the line to the database
 //         ItemJnlLine.Insert(true);
-
-//         // Post the line using codeunit 22 — silent, single-line, no UI
 //         ItemJnlPostLine.RunWithCheck(ItemJnlLine);
-
-//         // Confirm to the user what happened
 //         Message('Bharat: Added %1 units of %2 at %3.', Shortage, Rec."No.", Rec."Location Code");
 //     end;
 // }

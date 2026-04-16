@@ -2,7 +2,7 @@ page 60297 "Credit Limit Log List29"
 {
     PageType = List;
     SourceTable = "Credit Limit Log BR 29";
-    ApplicationArea = All;   // ✅ Page level
+    ApplicationArea = All;
     UsageCategory = Lists;
 
     layout
