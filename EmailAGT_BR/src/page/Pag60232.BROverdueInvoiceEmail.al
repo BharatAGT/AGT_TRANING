@@ -46,7 +46,7 @@ page 60232 "BR Overdue Invoice Email"
             action(SendEmails)
             {
                 ApplicationArea = All;
-                Caption = 'Send Reminder Emails';
+                Caption = 'AGTBR:Send Reminder Emails';
                 Image = SendMail;
                 Promoted = true;
                 PromotedCategory = Process;

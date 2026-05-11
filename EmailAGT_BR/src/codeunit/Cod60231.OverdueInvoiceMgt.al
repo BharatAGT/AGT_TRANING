@@ -4,7 +4,7 @@ codeunit 60231 "Overdue Invoice Mgt."
     var
         OverdueSetup: Record "Overdue Invoice Setup";
     begin
-        OverdueSetup.Get('1');
+        OverdueSetup.Get('');
 
         CustLedgEntry.Reset();
         CustLedgEntry.SetRange("Document Type", CustLedgEntry."Document Type"::Invoice);

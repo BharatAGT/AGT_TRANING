@@ -30,9 +30,9 @@ page 60230 "BR Overdue Invoice Setup"
     var
         OverdueSetup: Record "Overdue Invoice Setup";
     begin
-        if not OverdueSetup.Get(1) then begin
+        if not OverdueSetup.Get('') then begin
             OverdueSetup.Init();
-            OverdueSetup."Primary Key" := '1';
+            OverdueSetup."Primary Key" := '';
             OverdueSetup.Insert();
         end;
     end;
