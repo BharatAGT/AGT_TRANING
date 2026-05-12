@@ -13,6 +13,7 @@ table 60452 "BR Vendor Evaluation Line"
         field(2; "Line No."; Integer)
         {
             DataClassification = ToBeClassified;
+            AutoIncrement = true;
         }
 
         field(3; "Criteria Code"; Code[20])
@@ -42,8 +43,8 @@ table 60452 "BR Vendor Evaluation Line"
 
             trigger OnValidate()
             begin
-                if Weightage = 0 then
-                    Error('Weightage cannot be zero.');
+                if Weightage <= 0 then
+                    Error('Weightage must be a positive value.');
             end;
         }
 

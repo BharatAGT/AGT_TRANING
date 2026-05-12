@@ -7,6 +7,7 @@ table 60451 "BR Vendor Evaluation Header"
         field(1; "Evaluation No."; Code[20])
         {
             DataClassification = ToBeClassified;
+            TableRelation = "BR Vendor Evaluation Line"."Evaluation No.";
         }
 
         field(2; "Vendor No."; Code[20])

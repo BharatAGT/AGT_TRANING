@@ -81,8 +81,7 @@ page 60455 "BR Vendor Evaluation Doc. Page"
                         until EvaluationLine.Next() = 0;
                     end;
 
-                    FinalScore :=
-                    Final.CalculateFinalScore(Rec."Evaluation No.");
+                    FinalScore := Final.CalculateFinalScore(Rec."Evaluation No.");
 
                     Rec."Final Score" := FinalScore;
                     Rec.Modify();

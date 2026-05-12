@@ -4,6 +4,7 @@ page 60454 "BR Vendor Evaluation List"
     SourceTable = "BR Vendor Evaluation Header";
     ApplicationArea = All;
     UsageCategory = Lists;
+    CardPageId = "BR Vendor Evaluation Doc. Page";
 
     layout
     {

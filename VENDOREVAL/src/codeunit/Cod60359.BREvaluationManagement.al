@@ -20,8 +20,7 @@ codeunit 60459 "BR EvaluationManagement"
         if EvaluationLine.Weightage = 0 then
             Error('Weightage cannot be zero.');
 
-        EvaluationLine."Weighted Score" :=
-        (EvaluationLine.Score * EvaluationLine.Weightage) / 100;
+        EvaluationLine."Weighted Score" := (EvaluationLine.Score * EvaluationLine.Weightage) / 100;
 
         EvaluationLine.Modify();
     end;
@@ -47,20 +46,16 @@ codeunit 60459 "BR EvaluationManagement"
 
     procedure AssignRating(var VendorEvaluationHeader: Record "BR Vendor Evaluation Header")
     begin
-        if VendorEvaluationHeader."Final Score" >= 90 then
-            VendorEvaluationHeader."Rating Status" :=
+        if VendorEvaluationHeader."Final Score" >= 90 then VendorEvaluationHeader."Rating Status" :=
             VendorEvaluationHeader."Rating Status"::Excellent
         else
-            if VendorEvaluationHeader."Final Score" >= 75 then
-                VendorEvaluationHeader."Rating Status" :=
+            if VendorEvaluationHeader."Final Score" >= 75 then VendorEvaluationHeader."Rating Status" :=
                 VendorEvaluationHeader."Rating Status"::Good
             else
-                if VendorEvaluationHeader."Final Score" >= 50 then
-                    VendorEvaluationHeader."Rating Status" :=
+                if VendorEvaluationHeader."Final Score" >= 50 then VendorEvaluationHeader."Rating Status" :=
                     VendorEvaluationHeader."Rating Status"::Average
                 else
-                    VendorEvaluationHeader."Rating Status" :=
-                    VendorEvaluationHeader."Rating Status"::Poor;
+                    VendorEvaluationHeader."Rating Status" := VendorEvaluationHeader."Rating Status"::Poor;
 
         VendorEvaluationHeader.Modify();
     end;
@@ -77,8 +72,7 @@ codeunit 60459 "BR EvaluationManagement"
         if not EvaluationLine.FindFirst() then
             Error('Cannot complete evaluation without lines.');
 
-        VendorEvaluationHeader.Status :=
-        VendorEvaluationHeader.Status::Completed;
+        VendorEvaluationHeader.Status := VendorEvaluationHeader.Status::Completed;
 
         VendorEvaluationHeader.Modify();
 
