@@ -3,10 +3,18 @@ codeunit 60460 "BR Evaluation Subscriber"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"BR EvaluationManagement", 'OnAfterScoreCalculation', '', false, false)]
 
     local procedure OnAfterScoreCalculation(EvaluationNo: Code[20])
+    var
+        CommentLog: Record "BR Evaluation Comment Log";
     begin
-        Message('Score Calculated Successfully for %1', EvaluationNo);
-    end;
+        CommentLog.Init();
+        CommentLog."Evaluation No." := EvaluationNo;
+        CommentLog.Comments := 'Score calculated successfully.';
+        CommentLog."Created By" := UserId;
+        CommentLog."Created Date Time" := CurrentDateTime;
+        CommentLog.Insert();
 
+        Message('Score calculation completed.');
+    end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"BR EvaluationManagement", 'OnAfterEvaluationCompleted', '', false, false)]
 
@@ -16,19 +24,11 @@ codeunit 60460 "BR Evaluation Subscriber"
     begin
         CommentLog.Init();
         CommentLog."Evaluation No." := EvaluationNo;
-        CommentLog.Comments := 'Evaluation Completed';
+        CommentLog.Comments := 'Evaluation completed successfully.';
         CommentLog."Created By" := UserId;
-        CommentLog."Created DateTime" := CurrentDateTime();
+        CommentLog."Created Date Time" := CurrentDateTime;
         CommentLog.Insert();
 
-        Message('Evaluation Completed Successfully');
-    end;
-
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"BR EvaluationManagement", 'OnBeforeCompleteEvaluation', '', false, false)]
-
-    local procedure OnBeforeCompleteEvaluation(EvaluationNo: Code[20])
-    begin
-        Message('Evaluation is about to complete : %1', EvaluationNo);
+        Message('Evaluation completed successfully.');
     end;
 }

@@ -1,49 +1,52 @@
 page 60456 "BR Vendor Evaluation Subform"
 {
     PageType = ListPart;
-    ApplicationArea = All;
-    UsageCategory = Administration;
     SourceTable = "BR Vendor Evaluation Line";
+    ApplicationArea = All;
 
     layout
     {
         area(Content)
         {
-            repeater(GroupName)
+            repeater(General)
             {
-                field("Evaluation No."; rec."Evaluation No.")
+                field("Evaluation No."; Rec."Evaluation No.")
                 {
-                    applicationArea = All;
-                    TableRelation = "BR Vendor Evaluation Line";
+                    ApplicationArea = All;
+                    Editable = false;
                 }
-                field("Line No."; rec."Line No.")
+
+                field("Line No."; Rec."Line No.")
                 {
-                    applicationArea = All;
-                    TableRelation = "BR Vendor Evaluation Line";
+                    ApplicationArea = All;
                 }
-                field("Criteria Code"; rec."Criteria Code")
+
+                field("Criteria Code"; Rec."Criteria Code")
                 {
-                    applicationArea = All;
+                    ApplicationArea = All;
                 }
-                field("Criteria Description"; rec."Criteria Description")
+
+                field("Criteria Description"; Rec."Criteria Description")
                 {
-                    applicationArea = All;
+                    ApplicationArea = All;
                 }
-                field("Score"; rec.Score)
+
+                field(Score; Rec.Score)
                 {
-                    applicationArea = All;
+                    ApplicationArea = All;
                 }
-                field("Weightage"; rec.Weightage)
+
+                field(Weightage; Rec.Weightage)
                 {
-                    applicationArea = All;
+                    ApplicationArea = All;
                 }
-                field("Weighted Score"; rec."Weighted Score")
+
+                field("Weighted Score"; Rec."Weighted Score")
                 {
-                    applicationArea = All;
+                    ApplicationArea = All;
+                    Editable = false;
                 }
             }
         }
     }
-
-
 }

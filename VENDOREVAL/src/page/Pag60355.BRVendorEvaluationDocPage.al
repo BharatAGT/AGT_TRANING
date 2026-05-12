@@ -1,20 +1,19 @@
 page 60455 "BR Vendor Evaluation Doc. Page"
 {
     PageType = Document;
+    SourceTable = "BR Vendor Evaluation Header";
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = "BR Vendor Evaluation Header";
 
     layout
     {
         area(Content)
         {
-            group(GroupName)
+            group(General)
             {
                 field("Evaluation No."; Rec."Evaluation No.")
                 {
                     ApplicationArea = All;
-                    TableRelation = "BR Vendor Evaluation Line";
                 }
 
                 field("Vendor No."; Rec."Vendor No.")
@@ -25,7 +24,7 @@ page 60455 "BR Vendor Evaluation Doc. Page"
                 field("Vendor Name"; Rec."Vendor Name")
                 {
                     ApplicationArea = All;
-
+                    Editable = false;
                 }
 
                 field("Evaluation Month"; Rec."Evaluation Month")
@@ -36,14 +35,16 @@ page 60455 "BR Vendor Evaluation Doc. Page"
                 field("Final Score"; Rec."Final Score")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
 
                 field("Rating Status"; Rec."Rating Status")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
 
-                field("Status"; Rec.Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = All;
                 }
@@ -68,8 +69,27 @@ page 60455 "BR Vendor Evaluation Doc. Page"
                 trigger OnAction()
                 var
                     Final: Codeunit "BR EvaluationManagement";
+                    EvaluationLine: Record "BR Vendor Evaluation Line";
+                    FinalScore: Decimal;
                 begin
+                    EvaluationLine.Reset();
+                    EvaluationLine.SetRange("Evaluation No.", Rec."Evaluation No.");
+
+                    if EvaluationLine.FindSet() then begin
+                        repeat
+                            Final.CalculateWeightedScore(EvaluationLine);
+                        until EvaluationLine.Next() = 0;
+                    end;
+
+                    FinalScore :=
                     Final.CalculateFinalScore(Rec."Evaluation No.");
+
+                    Rec."Final Score" := FinalScore;
+                    Rec.Modify();
+
+                    Final.AssignRating(Rec);
+
+                    Message('Score calculated successfully.');
                 end;
             }
 
@@ -81,6 +101,7 @@ page 60455 "BR Vendor Evaluation Doc. Page"
                 var
                     Final: Codeunit "BR EvaluationManagement";
                 begin
+                    Final.CompleteEvaluation(Rec);
                 end;
             }
 
@@ -91,7 +112,9 @@ page 60455 "BR Vendor Evaluation Doc. Page"
                 trigger OnAction()
                 begin
                     Rec.Status := Rec.Status::Open;
-                    Message('Evaluation Re-Opened');
+                    Rec.Modify();
+
+                    Message('Evaluation reopened successfully.');
                 end;
             }
         }

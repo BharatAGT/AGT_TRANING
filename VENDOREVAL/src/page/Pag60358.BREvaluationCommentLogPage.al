@@ -1,51 +1,41 @@
 page 60458 "BR Evaluation Comment Log Page"
 {
     PageType = List;
-    ApplicationArea = All;
-    UsageCategory = Administration;
     SourceTable = "BR Evaluation Comment Log";
+    ApplicationArea = All;
+    UsageCategory = Lists;
 
     layout
     {
         area(Content)
         {
-            repeater(GroupName)
+            repeater(General)
             {
-                field("Evaluation No."; rec."Evaluation No.")
+                field("Entry No."; Rec."Entry No.")
                 {
-                    applicationArea = All;
+                    ApplicationArea = All;
                 }
-                field("Comments"; rec."Comments")
+
+                field("Evaluation No."; Rec."Evaluation No.")
                 {
-                    applicationArea = All;
+                    ApplicationArea = All;
                 }
-                field("Created By"; rec."Created By")
+
+                field(Comments; Rec.Comments)
                 {
-                    applicationArea = All;
+                    ApplicationArea = All;
                 }
-                field("Created DateTime"; rec."Created DateTime")
+
+                field("Created By"; Rec."Created By")
                 {
-                    applicationArea = All;
+                    ApplicationArea = All;
+                }
+
+                field("Created Date Time"; Rec."Created Date Time")
+                {
+                    ApplicationArea = All;
                 }
             }
         }
     }
-
-    actions
-    {
-        area(Processing)
-        {
-            action(ActionName)
-            {
-
-                trigger OnAction()
-                begin
-
-                end;
-            }
-        }
-    }
-
-    var
-        myInt: Integer;
 }

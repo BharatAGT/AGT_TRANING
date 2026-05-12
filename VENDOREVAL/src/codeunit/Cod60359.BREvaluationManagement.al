@@ -15,16 +15,15 @@ codeunit 60459 "BR EvaluationManagement"
     begin
     end;
 
-    procedure CalculateWeightedScore(Score: Decimal; Weightage: Decimal): Decimal
-    var
-        WeightedScore: Decimal;
+    procedure CalculateWeightedScore(var EvaluationLine: Record "BR Vendor Evaluation Line")
     begin
-        if Weightage = 0 then
-            Error('Weightage cannot be zero');
+        if EvaluationLine.Weightage = 0 then
+            Error('Weightage cannot be zero.');
 
-        WeightedScore := (Score * Weightage) / 100;
+        EvaluationLine."Weighted Score" :=
+        (EvaluationLine.Score * EvaluationLine.Weightage) / 100;
 
-        exit(WeightedScore);
+        EvaluationLine.Modify();
     end;
 
     procedure CalculateFinalScore(EvaluationNo: Code[20]): Decimal
@@ -35,26 +34,35 @@ codeunit 60459 "BR EvaluationManagement"
         EvaluationLine.Reset();
         EvaluationLine.SetRange("Evaluation No.", EvaluationNo);
 
-        if EvaluationLine.FindSet() then
+        if EvaluationLine.FindSet() then begin
             repeat
-                FinalScore += EvaluationLine."Weighted Score";
+                FinalScore := FinalScore + EvaluationLine."Weighted Score";
             until EvaluationLine.Next() = 0;
+        end;
+
+        OnAfterScoreCalculation(EvaluationNo);
 
         exit(FinalScore);
     end;
 
-    procedure AssignRating(FinalScore: Decimal): Text[20]
+    procedure AssignRating(var VendorEvaluationHeader: Record "BR Vendor Evaluation Header")
     begin
-        if FinalScore >= 90 then
-            exit('Excellent')
+        if VendorEvaluationHeader."Final Score" >= 90 then
+            VendorEvaluationHeader."Rating Status" :=
+            VendorEvaluationHeader."Rating Status"::Excellent
         else
-            if FinalScore >= 75 then
-                exit('Good')
+            if VendorEvaluationHeader."Final Score" >= 75 then
+                VendorEvaluationHeader."Rating Status" :=
+                VendorEvaluationHeader."Rating Status"::Good
             else
-                if FinalScore >= 50 then
-                    exit('Average')
+                if VendorEvaluationHeader."Final Score" >= 50 then
+                    VendorEvaluationHeader."Rating Status" :=
+                    VendorEvaluationHeader."Rating Status"::Average
                 else
-                    exit('Poor');
+                    VendorEvaluationHeader."Rating Status" :=
+                    VendorEvaluationHeader."Rating Status"::Poor;
+
+        VendorEvaluationHeader.Modify();
     end;
 
     procedure CompleteEvaluation(var VendorEvaluationHeader: Record "BR Vendor Evaluation Header")
@@ -67,11 +75,15 @@ codeunit 60459 "BR EvaluationManagement"
         EvaluationLine.SetRange("Evaluation No.", VendorEvaluationHeader."Evaluation No.");
 
         if not EvaluationLine.FindFirst() then
-            Error('Cannot complete evaluation without lines');
+            Error('Cannot complete evaluation without lines.');
 
-        VendorEvaluationHeader.Status := VendorEvaluationHeader.Status::Completed;
+        VendorEvaluationHeader.Status :=
+        VendorEvaluationHeader.Status::Completed;
+
         VendorEvaluationHeader.Modify();
 
         OnAfterEvaluationCompleted(VendorEvaluationHeader."Evaluation No.");
+
+        Message('Evaluation completed successfully.');
     end;
 }
